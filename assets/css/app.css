@@ -35,6 +35,12 @@
   margin: -1rem 0 2rem;
 }
 
+.checkbox {
+  margin: 2rem 0 -0.5rem;
+}
+.checkbox label {
+  display: inline;
+}
 /* LiveView specific classes for your customization */
 .phx-no-feedback.invalid-feedback,
 .phx-no-feedback .invalid-feedback {

@@ -25,9 +25,17 @@ config :management, ManagementWeb.Endpoint,
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
 config :management, Management.Mailer, adapter: Swoosh.Adapters.Local
+# config :management, Management.Mailer,
+#   adapter: Swoosh.Adapters.Gmail,
+#   access_token: {:system, "GMAIL_API_ACCESS_TOKEN"}
+# config :management, Management.Mailer,
+#  adapter: Swoosh.Adapters.Mailjet,
+#   api_key: "xxxxxxxx",
+#   secret: "yyyyyyyy"
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
+# config :swoosh, :api_client, Swoosh.ApiClient.Hackney
 
 # Configure esbuild (the version is required)
 config :esbuild,
