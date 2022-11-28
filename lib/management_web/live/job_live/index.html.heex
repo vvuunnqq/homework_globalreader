@@ -1,0 +1,45 @@
+<h1>Listing Jobs</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.job_index_path(@socket, :index)}>
+    <.live_component
+      module={ManagementWeb.JobLive.FormComponent}
+      id={@job.id || :new}
+      title={@page_title}
+      action={@live_action}
+      job={@job}
+      return_to={Routes.job_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job ID</th>
+      <th>Tittle</th>
+      <th>Description</th>
+      <th>User ID</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="jobs">
+    <%= for job <- @jobs do %>
+      <tr id={"job-#{job.id}"}>
+        <td><%= job.job_id %></td>
+        <td><%= job.job_title %></td>
+        <td><%= job.description %></td>
+        <td><%= job.user_id %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.job_show_path(@socket, :show, job) %></span>
+          <span><%= live_patch "Edit", to: Routes.job_index_path(@socket, :edit, job) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: job.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Job", to: Routes.job_index_path(@socket, :new) %></span>

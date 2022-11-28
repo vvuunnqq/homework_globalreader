@@ -1,11 +1,19 @@
 defmodule Management.Accounts.User do
+
   use Ecto.Schema
   import Ecto.Changeset
+
+  alias Management.DevicesAndJobs.Device
+  alias Management.DevicesAndJobs.Job
 
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
+    field :devices_count, :integer, virtual: true
+    field :jobs_count, :integer, virtual: true
+    has_many :devices, Device
+    has_many :jobs, Job
     timestamps()
   end
 

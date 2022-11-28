@@ -81,6 +81,26 @@ defmodule ManagementWeb.Router do
   end
 
   scope "/", ManagementWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/devices", DeviceLive.Index, :index
+    live "/devices/new", DeviceLive.Index, :new
+    live "/devices/:id/edit", DeviceLive.Index, :edit
+    live "/devices/:id", DeviceLive.Show, :show
+    live "/devices/:id/show/edit", DeviceLive.Show, :edit
+  end
+
+  scope "/", ManagementWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live "/jobs", JobLive.Index, :index
+    live "/jobs/new", JobLive.Index, :new
+    live "/jobs/:id/edit", JobLive.Index, :edit
+    live "/jobs/:id", JobLive.Show, :show
+    live "/jobs/:id/show/edit", JobLive.Show, :edit
+  end
+
+  scope "/", ManagementWeb do
     pipe_through [:browser]
 
     delete "/users/log_out", UserSessionController, :delete

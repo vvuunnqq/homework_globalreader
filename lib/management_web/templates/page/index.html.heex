@@ -1,5 +1,17 @@
 <section class="phx-hero">
-  <h1>Management</h1>
+  <h1>Home Page</h1>
+</section>
+
+<section>
+  <h2>Access List</h2>
+  <ul>
+    <li>
+      <%= link "Devices management", to: Routes.device_index_path(@conn, :index) %>
+    </li>
+    <li>
+      <%= link "Jobs management", to: Routes.job_index_path(@conn, :index) %>
+    </li>
+  </ul>
 </section>
 
 <section class="row">
@@ -7,7 +19,10 @@
     <h2>Resources</h2>
     <ul>
       <li>
-        <a href="https://github.com/vvuunnqq/homework_globalreader">Source</a>
+        <a href="https://github.com/vvuunnqq/homework_globalreader">Source code</a>
+      </li>
+      <li>
+        Owner: Vu Q. Nguyen - vunq.uit@gmail.com
       </li>
     </ul>
   </article>

@@ -1,0 +1,45 @@
+<h1>Listing Devices</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.device_index_path(@socket, :index)}>
+    <.live_component
+      module={ManagementWeb.DeviceLive.FormComponent}
+      id={@device.id || :new}
+      title={@page_title}
+      action={@live_action}
+      device={@device}
+      return_to={Routes.device_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Device ID</th>
+      <th>Device Name</th>
+      <th>Description</th>
+      <th>User Id</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="devices">
+    <%= for device <- @devices do %>
+      <tr id={"device-#{device.id}"}>
+        <td><%= device.device_id %></td>
+        <td><%= device.device_name %></td>
+        <td><%= device.description %></td>
+        <td><%= device.user_id %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.device_show_path(@socket, :show, device) %></span>
+          <span><%= live_patch "Edit", to: Routes.device_index_path(@socket, :edit, device) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: device.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Device", to: Routes.device_index_path(@socket, :new) %></span>
