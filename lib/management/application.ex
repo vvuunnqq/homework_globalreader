@@ -15,7 +15,12 @@ defmodule Management.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Management.PubSub},
       # Start the Endpoint (http/https)
-      ManagementWeb.Endpoint
+      ManagementWeb.Endpoint,
+      # Start health check an endpoint
+      %{
+        id: HealthCheck,
+        start: {Management.HealthCheck, :start_link, [["https://apis.globalreader.eu/health"]]}
+      }
       # Start a worker by calling: Management.Worker.start_link(arg)
       # {Management.Worker, arg}
     ]
